@@ -63,7 +63,9 @@ def deli_tags(uri, id)
     if deli['top_tags'].class == Hash then
         tags = '((' << deli['top_tags'].sort_by {|k,v| v}.reverse.map{|i|i[0]}.join(', ') << '))'
     end
-    response = "#{id}: (deli) L=#{deli['total_posts']} #{tags}"
+    if deli['total_posts'] > 0:
+        response = "#{id}: (deli) #{deli['total_posts']} links, tagged #{tags}"
+    end
     $threads['muc']['bot'].say response
 end
 
